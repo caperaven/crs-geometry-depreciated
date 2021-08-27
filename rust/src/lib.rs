@@ -1,6 +1,8 @@
 extern crate euclid;
 
 mod shapes;
+mod utils;
+
 use shapes::rectangle::Rectangle;
 
 type Point = euclid::Point2D<i32, i32>;
