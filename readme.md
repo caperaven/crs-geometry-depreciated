@@ -1,16 +1,13 @@
-# CRS Rust WASM Starter
+# CRS Geometry
+
+IN PROGRESS
 
 ## Introduction
-This project is a template for starting Rust web assembly libraries.  
-This project uses standard ES Modules thus no bundlers.
+This project is a 2d geometry shape data calculator.
 
-This project assumes you have rust installed and dependencies like wasm-pack.  
-If you don't have wasm-pack installed you can do so using
 ```
 cargo install wasm-pack
 ```
-
-Remember to update the Cargo.toml file in the rust folder with your project details.
 
 ## Building the project
 ```
