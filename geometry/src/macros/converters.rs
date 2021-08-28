@@ -1,6 +1,6 @@
 #[macro_export]
-macro_rules! str_to_f32 (
+macro_rules! str_to_i32 (
     ($str:expr) => ({
-        $str.parse::<i32>().unwrap()
+        $str.trim().parse::<i32>().unwrap()
     })
 );

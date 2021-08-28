@@ -1,6 +1,6 @@
 use crate::{Point, Points, Size, BoundingBox};
 use crate::utils::standard_aabb::get_bounding;
-use crate::str_to_f32;
+use crate::str_to_i32;
 
 pub struct Triangle {
     pub name: String,
@@ -39,12 +39,24 @@ impl From<String> for Triangle {
         let parts: Vec<&str> = def.split(",").collect();
 
         let name = String::from(parts[0]);
-        let x: i32 = str_to_f32!(parts[1]);
-        let y: i32 = str_to_f32!(parts[2]);
-        let width: i32 = str_to_f32!(parts[3]);
-        let height: i32 = str_to_f32!(parts[4]);
+        let x: i32 = str_to_i32!(parts[1]);
+        let y: i32 = str_to_i32!(parts[2]);
+        let width: i32 = str_to_i32!(parts[3]);
+        let height: i32 = str_to_i32!(parts[4]);
 
         return Triangle::new(name,Point::new(x, y), Size::new(width, height));
+    }
+}
+
+impl From<Triangle> for String {
+    fn from(triangle: Triangle) -> String {
+        let mut parts: Vec<String> = Vec::new();
+        parts.push(triangle.name);
+        parts.push(triangle.origin.x.to_string());
+        parts.push(triangle.origin.y.to_string());
+        parts.push(triangle.aabb.width.to_string());
+        parts.push(triangle.aabb.height.to_string());
+        return parts.join(",");
     }
 }
 
@@ -63,6 +75,13 @@ mod test {
         let value = String::from("Triangle 1,0,0,200,200");
         let triangle: Triangle = Triangle::from(value);
         assert_triangle(&triangle);
+    }
+
+    #[test]
+    fn triangle_to_string() {
+        let triangle = Triangle::new("Triangle 1".into(),Point::new(0, 0), Size::new(200, 200));
+        let result: String = triangle.into();
+        assert_eq!(result, "Triangle 1,0,0,200,200")
     }
 
     fn assert_triangle(triangle: &Triangle) {

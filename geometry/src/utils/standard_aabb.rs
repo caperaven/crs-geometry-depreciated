@@ -17,7 +17,7 @@ pub fn get_bounding(origin: Point, size: Size) -> BoundingParts {
     let max_x = origin.x + half_width;
     let min_y = origin.y - half_height;
     let max_y = origin.y + half_height;
-    let aabb = BoundingBox {min_x, max_x, min_y, max_y};
+    let aabb = BoundingBox {min_x, max_x, min_y, max_y, width: size.width, height: size.height};
 
     return BoundingParts {
         half_width,

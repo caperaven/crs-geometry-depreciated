@@ -1,6 +1,6 @@
 use crate::{Point, Points, Size, BoundingBox};
 use crate::utils::standard_aabb::get_bounding;
-use crate::str_to_f32;
+use crate::str_to_i32;
 
 /// Rectangle Data Structure
 pub struct Rectangle {
@@ -34,18 +34,33 @@ impl Rectangle {
 }
 
 /// Convert a String to Rectangle
-/// Structure: "rect,origin_x,origin_y,width,height"
+/// Structure: "name,origin_x,origin_y,width,height"
 /// Example: "rect,0,0,200,200"
 impl From<String> for Rectangle {
     fn from(def: String) -> Rectangle {
         let parts: Vec<&str> = def.split(",").collect();
 
-        let x: i32 = str_to_f32!(parts[1]);
-        let y: i32 = str_to_f32!(parts[2]);
-        let width: i32 = str_to_f32!(parts[3]);
-        let height: i32 = str_to_f32!(parts[4]);
+        let x: i32 = str_to_i32!(parts[1]);
+        let y: i32 = str_to_i32!(parts[2]);
+        let width: i32 = str_to_i32!(parts[3]);
+        let height: i32 = str_to_i32!(parts[4]);
 
         return Rectangle::new("Rectangle 1".into(),Point::new(x, y), Size::new(width, height));
+    }
+}
+
+/// Convert Rectangle to String
+/// Example: let result: String = rectangle.into();
+/// Result Structure: "name,origin_x,origin_y,width,height"
+impl From<Rectangle> for String {
+    fn from(rectangle: Rectangle) -> String {
+        let mut parts: Vec<String> = Vec::new();
+        parts.push(rectangle.name);
+        parts.push(rectangle.origin.x.to_string());
+        parts.push(rectangle.origin.y.to_string());
+        parts.push(rectangle.aabb.width.to_string());
+        parts.push(rectangle.aabb.height.to_string());
+        return parts.join(",");
     }
 }
 
@@ -64,6 +79,13 @@ mod test {
         let value = String::from("Rectangle 1,0,0,200,200");
         let rectangle: Rectangle = Rectangle::from(value);
         assert_rectangle(&rectangle);
+    }
+
+    #[test]
+    fn rectangle_to_string() {
+        let rectangle = Rectangle::new("Rectangle 1".into(),Point::new(0, 0), Size::new(200, 200));
+        let result: String = rectangle.into();
+        assert_eq!(result, "Rectangle 1,0,0,200,200");
     }
 
     fn assert_rectangle(rectangle: &Rectangle) {
