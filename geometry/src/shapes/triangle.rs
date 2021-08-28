@@ -14,7 +14,7 @@ pub struct Triangle {
 
 impl Triangle {
     pub fn new(name: String, origin: Point, size: Size) -> Triangle {
-        let parts = get_bounding(origin, size);
+        let parts = get_bounding(&origin, &size);
 
         let mut points: Points = Vec::new();
         points.push(Point::new(origin.x, parts.min_y));

@@ -14,7 +14,7 @@ pub struct Rectangle {
 
 impl Rectangle {
     pub fn new (name: String, origin: Point, size: Size) -> Rectangle {
-        let parts = get_bounding(origin, size);
+        let parts = get_bounding(&origin, &size);
 
         let mut points: Points = Vec::new();
         points.push(Point::new(parts.min_x, parts.min_y));

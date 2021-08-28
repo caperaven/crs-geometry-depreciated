@@ -10,7 +10,7 @@ pub struct BoundingParts {
     pub aabb: BoundingBox
 }
 
-pub fn get_bounding(origin: Point, size: Size) -> BoundingParts {
+pub fn get_bounding(origin: &Point, size: &Size) -> BoundingParts {
     let half_width = size.width / 2.0;
     let half_height = size.height / 2.0;
     let min_x = origin.x - half_width;

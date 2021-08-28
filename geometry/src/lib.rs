@@ -6,6 +6,7 @@ mod macros;
 
 use shapes::rectangle::Rectangle;
 use shapes::triangle::Triangle;
+use shapes::circle::Circle;
 
 pub type Point = euclid::Point2D<f32, f32>;
 pub type Points = Vec<Point>;
@@ -27,4 +28,8 @@ pub fn rectangle(name: String, x: f32, y: f32, width: f32, height: f32) -> Recta
 
 pub fn triangle(name: String, x: f32, y: f32, width: f32, height: f32) -> Triangle {
     return Triangle::new(name,Point::new(x, y), Size::new(width, height));
+}
+
+pub fn circle(name: String, x: f32, y: f32, radius: f32, segments: i16) -> Circle {
+    return Circle::new(name, Point::new(x, y), radius, segments);
 }
