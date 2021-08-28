@@ -10,6 +10,7 @@ pub fn set_point_array_property(obj: &js_sys::Object, property: &str, collection
     for item in collection.iter() {
         values.push(&item.x.into());
         values.push(&item.y.into());
+        values.push(&0.into());
     }
 
     set_property(obj, property, &values);
