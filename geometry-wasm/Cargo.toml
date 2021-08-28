@@ -1,5 +1,5 @@
 [package]
-name = "crs-geometry-wasm"
+name = "crs_geometry_wasm"
 version = "0.1.0"
 authors = ["caperaven <caperaven@gmail.com>"]
 edition = "2018"
@@ -12,6 +12,8 @@ crate-type = ["cdylib"]
 [dependencies]
 euclid = "0.22.6"
 wasm-bindgen = "0.2.73"
+js-sys = "0.3.53"
+crs_geometry = { version = "0.1.0", path = "../geometry" }
 
 [profile.release]
 lto = true

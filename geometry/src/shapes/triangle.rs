@@ -2,6 +2,7 @@ use crate::{Point, Points, Size, BoundingBox};
 use crate::utils::standard_aabb::get_bounding;
 use crate::str_to_i32;
 
+/// Triangle data structure
 pub struct Triangle {
     pub name: String,
     pub points: Points,
@@ -48,6 +49,9 @@ impl From<String> for Triangle {
     }
 }
 
+/// Convert Triangle to String
+/// Example: let result: String = triangle.into();
+/// Result Structure: "name,origin_x,origin_y,width,height"
 impl From<Triangle> for String {
     fn from(triangle: Triangle) -> String {
         let mut parts: Vec<String> = Vec::new();

@@ -7,9 +7,9 @@ mod macros;
 use shapes::rectangle::Rectangle;
 use shapes::triangle::Triangle;
 
-type Point = euclid::Point2D<i32, i32>;
-type Points = Vec<Point>;
-type Size = euclid::Size2D<i32, i32>;
+pub type Point = euclid::Point2D<i32, i32>;
+pub type Points = Vec<Point>;
+pub type Size = euclid::Size2D<i32, i32>;
 
 pub struct BoundingBox {
     pub min_x: i32,

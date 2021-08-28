@@ -2,11 +2,11 @@ use crate::{Point, Points, Size, BoundingBox};
 use crate::utils::standard_aabb::get_bounding;
 use crate::str_to_i32;
 
-/// Rectangle Data Structure
+/// Rectangle data structure
 pub struct Rectangle {
     pub name: String,
     pub points: Points,
-    pub indices: Vec<i8>,
+    pub indices: Vec<i32>,
     pub origin: Point,
     pub aabb: BoundingBox
 }
