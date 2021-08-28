@@ -1,6 +1,6 @@
 use crate::{Point, Points, Size, BoundingBox};
 use crate::utils::standard_aabb::get_bounding;
-use crate::str_to_i32;
+use crate::str_to_f32;
 
 /// Triangle data structure
 #[derive(Debug, Clone)]
@@ -41,10 +41,10 @@ impl From<String> for Triangle {
         let parts: Vec<&str> = def.split(",").collect();
 
         let name = String::from(parts[0]);
-        let x: i32 = str_to_i32!(parts[1]);
-        let y: i32 = str_to_i32!(parts[2]);
-        let width: i32 = str_to_i32!(parts[3]);
-        let height: i32 = str_to_i32!(parts[4]);
+        let x = str_to_f32!(parts[1]);
+        let y = str_to_f32!(parts[2]);
+        let width = str_to_f32!(parts[3]);
+        let height = str_to_f32!(parts[4]);
 
         return Triangle::new(name,Point::new(x, y), Size::new(width, height));
     }
@@ -71,7 +71,7 @@ mod test {
 
     #[test]
     fn create_triangle() {
-        let triangle = Triangle::new("Triangle 1".into(),Point::new(0, 0), Size::new(200, 200));
+        let triangle = Triangle::new("Triangle 1".into(),Point::new(0.0, 0.0), Size::new(200.0, 200.0));
         assert_triangle(&triangle);
     }
 
@@ -84,7 +84,7 @@ mod test {
 
     #[test]
     fn triangle_to_string() {
-        let triangle = Triangle::new("Triangle 1".into(),Point::new(0, 0), Size::new(200, 200));
+        let triangle = Triangle::new("Triangle 1".into(),Point::new(0.0, 0.0), Size::new(200.0, 200.0));
         let result: String = triangle.into();
         assert_eq!(result, "Triangle 1,0,0,200,200")
     }
@@ -92,25 +92,25 @@ mod test {
     fn assert_triangle(triangle: &Triangle) {
         assert_eq!(triangle.name, "Triangle 1");
 
-        assert_eq!(triangle.origin.x, 0);
-        assert_eq!(triangle.origin.y, 0);
+        assert_eq!(triangle.origin.x, 0.0);
+        assert_eq!(triangle.origin.y, 0.0);
         assert_eq!(triangle.points.len(), 3);
 
-        assert_eq!(triangle.points[0].x, 0);
-        assert_eq!(triangle.points[0].y, -100);
-        assert_eq!(triangle.points[1].x, 100);
-        assert_eq!(triangle.points[1].y, 100);
-        assert_eq!(triangle.points[2].x, -100);
-        assert_eq!(triangle.points[2].y, 100);
+        assert_eq!(triangle.points[0].x, 0.0);
+        assert_eq!(triangle.points[0].y, -100.0);
+        assert_eq!(triangle.points[1].x, 100.0);
+        assert_eq!(triangle.points[1].y, 100.0);
+        assert_eq!(triangle.points[2].x, -100.0);
+        assert_eq!(triangle.points[2].y, 100.0);
 
         assert_eq!(triangle.indices.len(), 3);
         assert_eq!(triangle.indices[0], 0);
         assert_eq!(triangle.indices[1], 1);
         assert_eq!(triangle.indices[2], 2);
 
-        assert_eq!(triangle.aabb.min_x, -100);
-        assert_eq!(triangle.aabb.max_x, 100);
-        assert_eq!(triangle.aabb.min_y, -100);
-        assert_eq!(triangle.aabb.max_y, 100);
+        assert_eq!(triangle.aabb.min_x, -100.0);
+        assert_eq!(triangle.aabb.max_x, 100.0);
+        assert_eq!(triangle.aabb.min_y, -100.0);
+        assert_eq!(triangle.aabb.max_y, 100.0);
     }
 }
