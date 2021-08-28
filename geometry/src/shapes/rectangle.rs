@@ -3,6 +3,7 @@ use crate::utils::standard_aabb::get_bounding;
 use crate::str_to_i32;
 
 /// Rectangle data structure
+#[derive(Debug, Clone)]
 pub struct Rectangle {
     pub name: String,
     pub points: Points,

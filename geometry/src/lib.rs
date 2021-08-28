@@ -11,6 +11,7 @@ pub type Point = euclid::Point2D<i32, i32>;
 pub type Points = Vec<Point>;
 pub type Size = euclid::Size2D<i32, i32>;
 
+#[derive(Debug, Clone)]
 pub struct BoundingBox {
     pub min_x: i32,
     pub max_x: i32,

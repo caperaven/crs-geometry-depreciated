@@ -3,6 +3,7 @@ use crate::utils::standard_aabb::get_bounding;
 use crate::str_to_i32;
 
 /// Triangle data structure
+#[derive(Debug, Clone)]
 pub struct Triangle {
     pub name: String,
     pub points: Points,
