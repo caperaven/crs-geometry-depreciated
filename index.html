@@ -8,12 +8,12 @@
 </head>
 <body>
     <script type="module">
-        import init, {rectangle} from "/bin/crs_geometry_wasm.js";
+        import init, {rectangle, triangle} from "/bin/crs_geometry_wasm.js";
 
         async function run() {
             await init();
-            const result = rectangle("test", 0, 0, 200, 200);
-            console.log(result);
+            console.log(rectangle("rectangle", 0, 0, 200, 200));
+            console.log(triangle("triangle", 0, 0, 200, 200));
         }
 
         run();

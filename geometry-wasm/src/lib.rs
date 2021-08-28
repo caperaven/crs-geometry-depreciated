@@ -25,3 +25,17 @@ pub fn rectangle(name: String, x: i32, y: i32, width: i32, height: i32) -> Objec
 
     return result;
 }
+
+#[wasm_bindgen]
+pub fn triangle(name: String, x: i32, y: i32, width: i32, height: i32) -> Object {
+    let shape = crs_geometry::triangle(name, x, y, width, height);
+    let result = Object::new();
+
+    set_property(&result, "name", &shape.name.into());
+    set_point_array_property(&result, "points", &shape.points);
+    set_int_array_property(&result, "indices", &shape.indices);
+    set_point_property(&result, "origin", &shape.origin);
+    set_aabb_property(&result, "aabb", &shape.aabb);
+
+    return result;
+}
