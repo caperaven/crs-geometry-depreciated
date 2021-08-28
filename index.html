@@ -68,11 +68,7 @@
 
             const geometry = new THREE.BufferGeometry();
             const vertices = new Float32Array( [
-                //...triangle.points
-                0.0, -0.5, 0,
-                0.5, 0.5, 0,
-                -0.5, 0.5, 0
-
+                ...triangle.points
             ] );
 
             const indices = [...triangle.indices];
@@ -81,12 +77,27 @@
             geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
             const material = new THREE.MeshBasicMaterial( { color: 0x90ff00 } );
             const mesh = new THREE.Mesh( geometry, material );
+            mesh.position.z = 1;
             scene.add(mesh);
         }
 
         function buildCircle() {
-            let circle = get_circle("circle", 0, 0, 1.5, 4);
+            let circle = get_circle("circle", 0, 0, 1, 10);
             console.log(circle);
+
+            const geometry = new THREE.BufferGeometry();
+            const vertices = new Float32Array( [
+                ...circle.points
+            ] );
+
+            const indices = [...circle.indices];
+            geometry.setIndex(indices);
+
+            geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+            const material = new THREE.MeshBasicMaterial( { color: 0x00ff90 } );
+            const mesh = new THREE.Mesh( geometry, material );
+
+            scene.add(mesh);
         }
     </script>
 </body>
