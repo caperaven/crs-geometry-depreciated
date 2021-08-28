@@ -20,10 +20,7 @@ impl Rectangle {
         points.push(Point::new(parts.min_x, parts.min_y));
         points.push(Point::new(parts.max_x, parts.min_y));
         points.push(Point::new(parts.max_x, parts.max_y));
-
-        points.push(Point::new(parts.max_x, parts.max_y));
         points.push(Point::new(parts.min_x, parts.max_y));
-        points.push(Point::new(parts.min_x, parts.min_y));
 
         let indices = vec![0, 1, 2, 2, 3, 0];
 
@@ -105,13 +102,8 @@ mod test {
         assert_eq!(rectangle.points[1].y, -100.0);
         assert_eq!(rectangle.points[2].x, 100.0);
         assert_eq!(rectangle.points[2].y, 100.0);
-
-        assert_eq!(rectangle.points[3].x, 100.0);
-        assert_eq!(rectangle.points[3].y, 100.0);
         assert_eq!(rectangle.points[4].x, -100.0);
         assert_eq!(rectangle.points[4].y, 100.0);
-        assert_eq!(rectangle.points[5].x, -100.0);
-        assert_eq!(rectangle.points[6].y, -100.0);
 
         assert_eq!(rectangle.indices.len(), 6);
         assert_eq!(rectangle.indices[0], 0);

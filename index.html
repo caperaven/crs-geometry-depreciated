@@ -17,7 +17,7 @@
     <script src="./js/three.js"></script>
 
     <script type="module">
-        import init, {rectangle, triangle} from "/bin/crs_geometry_wasm.js";
+        import init, {get_rectangle, get_triangle} from "/bin/crs_geometry_wasm.js";
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -40,21 +40,48 @@
             await init();
 //            console.log(triangle("triangle", 0, 0, 1, 1));
 
-            let rect = rectangle("rectangle", 0, 0, 2, 2);
+            //
+
+            buildRectangle();
+            buildTriangle();
+            renderer.render(scene, camera);
+        }
+
+        run();
+
+        function buildRectangle() {
+            let rect = get_rectangle("rectangle", 0, 0, 2, 2);
 
             const geometry = new THREE.BufferGeometry();
             const vertices = new Float32Array( [
                 ...rect.points
             ] );
 
+            const indices = [...rect.indices];
+            geometry.setIndex(indices);
+
             geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
-            const material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+            const material = new THREE.MeshBasicMaterial( { color: 0xff0090 } );
             const mesh = new THREE.Mesh( geometry, material );
             scene.add(mesh);
-            renderer.render(scene, camera);
         }
 
-        run();
+        function buildTriangle() {
+            let triangle = get_triangle("triangle", 0, 0, 2, 2);
+
+            const geometry = new THREE.BufferGeometry();
+            const vertices = new Float32Array( [
+                ...triangle.points
+            ] );
+
+            const indices = [...triangle.indices];
+            geometry.setIndex(indices);
+
+            geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+            const material = new THREE.MeshBasicMaterial( { color: 0x90ff00 } );
+            const mesh = new THREE.Mesh( geometry, material );
+            scene.add(mesh);
+        }
     </script>
 </body>
 </html>

@@ -13,7 +13,7 @@ use crate::utils::{
 };
 
 #[wasm_bindgen]
-pub fn rectangle(name: String, x: f32, y: f32, width: f32, height: f32) -> Object {
+pub fn get_rectangle(name: String, x: f32, y: f32, width: f32, height: f32) -> Object {
     let shape = crs_geometry::rectangle(name, x, y, width, height);
     let result = Object::new();
 
@@ -27,7 +27,7 @@ pub fn rectangle(name: String, x: f32, y: f32, width: f32, height: f32) -> Objec
 }
 
 #[wasm_bindgen]
-pub fn triangle(name: String, x: f32, y: f32, width: f32, height: f32) -> Object {
+pub fn get_triangle(name: String, x: f32, y: f32, width: f32, height: f32) -> Object {
     let shape = crs_geometry::triangle(name, x, y, width, height);
     let result = Object::new();
 
