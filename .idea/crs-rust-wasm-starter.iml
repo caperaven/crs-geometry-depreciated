@@ -2,11 +2,13 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/rust/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/geometry-wasm/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/geometry/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
-      <excludeFolder url="file://$MODULE_DIR$/rust/target" />
+      <excludeFolder url="file://$MODULE_DIR$/geometry/target" />
+      <excludeFolder url="file://$MODULE_DIR$/geometry-wasm/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

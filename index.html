@@ -8,11 +8,11 @@
 </head>
 <body>
     <script type="module">
-        import init, {add} from "/bin/wasm_lib.js";
+        import init, {test} from "/bin/crs_geometry_wasm.js";
 
         async function run() {
             await init();
-            const result = add(2, 2);
+            const result = test();
             alert(result);
         }
 
