@@ -1,7 +1,9 @@
 use crate::{Point, Points, Size, BoundingBox};
 use crate::utils::standard_aabb::get_bounding;
+use crate::str_to_f32;
 
 pub struct Triangle {
+    pub name: String,
     pub points: Points,
     pub indices: Vec<i8>,
     pub origin: Point,
@@ -9,7 +11,7 @@ pub struct Triangle {
 }
 
 impl Triangle {
-    pub fn new(origin: Point, size: Size) -> Triangle {
+    pub fn new(name: String, origin: Point, size: Size) -> Triangle {
         let parts = get_bounding(origin, size);
 
         let mut points: Points = Vec::new();
@@ -20,11 +22,29 @@ impl Triangle {
         let indices = vec![0, 1, 2];
 
         Triangle {
+            name,
             points,
             indices,
             origin,
             aabb: parts.aabb
         }
+    }
+}
+
+/// Convert a String to Triangle
+/// Structure: "name,origin_x,origin_y,width,height"
+/// Example: "triangle 1,0,0,200,200"
+impl From<String> for Triangle {
+    fn from(def: String) -> Triangle {
+        let parts: Vec<&str> = def.split(",").collect();
+
+        let name = String::from(parts[0]);
+        let x: i32 = str_to_f32!(parts[1]);
+        let y: i32 = str_to_f32!(parts[2]);
+        let width: i32 = str_to_f32!(parts[3]);
+        let height: i32 = str_to_f32!(parts[4]);
+
+        return Triangle::new(name,Point::new(x, y), Size::new(width, height));
     }
 }
 
@@ -34,7 +54,19 @@ mod test {
 
     #[test]
     fn create_triangle() {
-        let triangle = Triangle::new(Point::new(0, 0), Size::new(200, 200));
+        let triangle = Triangle::new("Triangle 1".into(),Point::new(0, 0), Size::new(200, 200));
+        assert_triangle(&triangle);
+    }
+
+    #[test]
+    fn triangle_from() {
+        let value = String::from("Triangle 1,0,0,200,200");
+        let triangle: Triangle = Triangle::from(value);
+        assert_triangle(&triangle);
+    }
+
+    fn assert_triangle(triangle: &Triangle) {
+        assert_eq!(triangle.name, "Triangle 1");
 
         assert_eq!(triangle.origin.x, 0);
         assert_eq!(triangle.origin.y, 0);

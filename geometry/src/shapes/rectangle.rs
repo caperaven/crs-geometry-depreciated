@@ -4,6 +4,7 @@ use crate::str_to_f32;
 
 /// Rectangle Data Structure
 pub struct Rectangle {
+    pub name: String,
     pub points: Points,
     pub indices: Vec<i8>,
     pub origin: Point,
@@ -11,7 +12,7 @@ pub struct Rectangle {
 }
 
 impl Rectangle {
-    pub fn new (origin: Point, size: Size) -> Rectangle {
+    pub fn new (name: String, origin: Point, size: Size) -> Rectangle {
         let parts = get_bounding(origin, size);
 
         let mut points: Points = Vec::new();
@@ -23,6 +24,7 @@ impl Rectangle {
         let indices = vec![0, 1, 2, 0, 2, 3];
 
         Rectangle {
+            name,
             points,
             indices,
             origin,
@@ -43,7 +45,7 @@ impl From<String> for Rectangle {
         let width: i32 = str_to_f32!(parts[3]);
         let height: i32 = str_to_f32!(parts[4]);
 
-        return Rectangle::new(Point::new(x, y), Size::new(width, height));
+        return Rectangle::new("Rectangle 1".into(),Point::new(x, y), Size::new(width, height));
     }
 }
 
@@ -53,18 +55,20 @@ mod test {
 
     #[test]
     fn create_rectangle() {
-        let rectangle = Rectangle::new(Point::new(0, 0), Size::new(200, 200));
+        let rectangle = Rectangle::new("Rectangle 1".into(),Point::new(0, 0), Size::new(200, 200));
         assert_rectangle(&rectangle);
     }
 
     #[test]
     fn rectangle_from() {
-        let value = String::from("r,0,0,200,200");
+        let value = String::from("Rectangle 1,0,0,200,200");
         let rectangle: Rectangle = Rectangle::from(value);
         assert_rectangle(&rectangle);
     }
 
     fn assert_rectangle(rectangle: &Rectangle) {
+        assert_eq!(rectangle.name, "Rectangle 1");
+
         assert_eq!(rectangle.origin.x, 0);
         assert_eq!(rectangle.origin.y, 0);
         assert_eq!(rectangle.points.len(), 4);
