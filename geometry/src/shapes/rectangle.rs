@@ -1,6 +1,8 @@
 use crate::{Point, Points, Size, BoundingBox};
 use crate::utils::standard_aabb::get_bounding;
+use crate::str_to_f32;
 
+/// Rectangle Data Structure
 pub struct Rectangle {
     pub points: Points,
     pub indices: Vec<i8>,
@@ -29,6 +31,22 @@ impl Rectangle {
     }
 }
 
+/// Convert a String to Rectangle
+/// Structure: "rect,origin_x,origin_y,width,height"
+/// Example: "rect,0,0,200,200"
+impl From<String> for Rectangle {
+    fn from(def: String) -> Rectangle {
+        let parts: Vec<&str> = def.split(",").collect();
+
+        let x: i32 = str_to_f32!(parts[1]);
+        let y: i32 = str_to_f32!(parts[2]);
+        let width: i32 = str_to_f32!(parts[3]);
+        let height: i32 = str_to_f32!(parts[4]);
+
+        return Rectangle::new(Point::new(x, y), Size::new(width, height));
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -36,7 +54,17 @@ mod test {
     #[test]
     fn create_rectangle() {
         let rectangle = Rectangle::new(Point::new(0, 0), Size::new(200, 200));
+        assert_rectangle(&rectangle);
+    }
 
+    #[test]
+    fn rectangle_from() {
+        let value = String::from("r,0,0,200,200");
+        let rectangle: Rectangle = Rectangle::from(value);
+        assert_rectangle(&rectangle);
+    }
+
+    fn assert_rectangle(rectangle: &Rectangle) {
         assert_eq!(rectangle.origin.x, 0);
         assert_eq!(rectangle.origin.y, 0);
         assert_eq!(rectangle.points.len(), 4);

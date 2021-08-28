@@ -2,6 +2,7 @@ extern crate euclid;
 
 mod shapes;
 mod utils;
+mod macros;
 
 use shapes::rectangle::Rectangle;
 use shapes::triangle::Triangle;
